@@ -23,11 +23,7 @@ function Get-CloudTrailKmsPolicy
                 'AWS': ['${roleArn}']
             },
             'Action': [
-                'kms:Encrypt',
-                'kms:Decrypt',
-                'kms:ReEncrypt*',
-                'kms:GenerateDataKey*',
-                'kms:DescribeKey'
+                'kms:Decrypt'
             ],
             'Resource': '*'
         }
@@ -117,7 +113,7 @@ function Get-RoleAndCloudTrailS3Policy
             'Principal': {
                 'AWS': '${roleArn}'
             },
-            'Action': ['s3:Get*','s3:List*'],
+            'Action': ['s3:GetObject'],
             'Resource': 'arn:aws:s3:::${bucketName}/*'
         },
 		{
@@ -315,14 +311,14 @@ Set-RetryAction({
 	{
 		if ($kmsConfirmation -eq 'y')
 		{
-			Write-Log -Message "Executing: aws cloudtrail create-trail --name $cloudTrailName --s3-bucket-name $bucketName --kms-key-id $kmsKeyId 2>&1" -LogFileName $LogFileName -Severity Verbose
-			$tempForOutput = aws cloudtrail create-trail --name $cloudTrailName --s3-bucket-name $bucketName --kms-key-id $kmsKeyId 2>&1
+			Write-Log -Message "Executing: aws cloudtrail create-trail --name $cloudTrailName --s3-bucket-name $bucketName --kms-key-id $kmsKeyId --tags-list [$(Get-SentinelTagInJsonFormat)] 2>&1" -LogFileName $LogFileName -Severity Verbose
+			$tempForOutput = aws cloudtrail create-trail --name $cloudTrailName --s3-bucket-name $bucketName --kms-key-id $kmsKeyId --tags-list [$(Get-SentinelTagInJsonFormat)] 2>&1
 			Write-Log -Message $tempForOutput -LogFileName $LogFileName -Severity Verbose
 		}
 		else
 		{
-			Write-Log -Message "Executing: aws cloudtrail create-trail --name $cloudTrailName --s3-bucket-name $bucketName 2>&1" -LogFileName $LogFileName -Severity Verbose
-			$tempForOutput = aws cloudtrail create-trail --name $cloudTrailName --s3-bucket-name $bucketName 2>&1
+			Write-Log -Message "Executing: aws cloudtrail create-trail --name $cloudTrailName --s3-bucket-name $bucketName --tags-list [$(Get-SentinelTagInJsonFormat)] 2>&1" -LogFileName $LogFileName -Severity Verbose
+			$tempForOutput = aws cloudtrail create-trail --name $cloudTrailName --s3-bucket-name $bucketName --tags-list [$(Get-SentinelTagInJsonFormat)] 2>&1
 			Write-Log -Message $tempForOutput -LogFileName $LogFileName -Severity Verbose
 		}
 		if($lastexitcode -eq 0)

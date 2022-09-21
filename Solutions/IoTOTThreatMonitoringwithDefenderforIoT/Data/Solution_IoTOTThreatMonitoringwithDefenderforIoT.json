@@ -1,33 +1,41 @@
 {
   "Name": "IoTOTThreatMonitoringwithDefenderforIoT",
-  "Author": "Nikhil Tripathi - v-ntripathi@microsoft.com",
+  "Author": "Microsoft - support@microsoft.com",
   "Logo": "<img src=\"https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Workbooks/Images/Logos/Azure_Sentinel.svg\"width=\"75px\"height=\"75px\">",
-  "Description": "There has been a long-standing split between SCADA (OT) and Corporate (IT) cybersecurity. This split was often driven by significant differences in technology/tooling. Azure Defender for IoT's integration with Azure Sentinel drives convergency by providing a single pane for coverage of both D4IOT (OT) and Azure Sentinel (IT) alerting. This solution includes (1) Workbook and (10) Analytics rules and provides a guided investigation for security operations teams. The workbook features IT/OT filtering for Security Alerts, Incidents, and Asset Inventory. The workbook also features a dynamic assessment of the MITRE ATT&CK for ICS matrix across your environment to analyze and respond to IOT-based threats. This solution is designed to enable SecOps Analysts, Security Engineers, and MSSPs to gain situational awareness for IT/OT security posture. This solution is enhanced when integrated with complimentary Microsoft Offerings such as ✳️ Azure Defender for IoT, ✳️ Azure Sentinel, and ✳️ Azure Security Center. This workbook augments staffing through automation, artificial intelligence, machine learning, query/alerting generation and visualizations.",
+  "Description": "The [Microsoft Defender for IoT](https://azure.microsoft.com/services/iot-defender/) solution for Microsoft Sentinel allows you to ingest Security alerts reported in Microsoft Defender for IoT on assessing your Internet of Things (IoT)/Operational Technology (OT) infrastructure. \n\n ** Underlying Microsoft Technologies used: ** \n\n This solution takes a dependency on the following technologies, and some of these dependencies either may be in [Preview](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) state or might result in additional ingestion or operational costs:  \n\n a. [Codeless Connector Platform/Native Sentinel Polling](https://docs.microsoft.com/azure/sentinel/create-codeless-connector?tabs=deploy-via-arm-template%2Cconnect-via-the-azure-portal)",
   "Workbooks": [
     "Workbooks/IoTOTThreatMonitoringwithDefenderforIoT.json"
   ],
   "Analytic Rules": [
     "Analytic Rules/IoTDenialofService.yaml",
-    "Analytic Rules/IoTExcessiveLoginAttempts.yaml",
-    "Analytic Rules/IoTFirmwareUpdates.yaml",
-    "Analytic Rules/IoTHighBandwidth.yaml",
-    "Analytic Rules/IoTIllegalFunctionCodes.yaml",
-    "Analytic Rules/IoTInsecurePLC.yaml",
-    "Analytic Rules/IoTInternetAccess.yaml",
-    "Analytic Rules/IoTMalware.yaml",
-    "Analytic Rules/IoTNetworkScanning.yaml",
-    "Analytic Rules/IoTPLCStopCommand.yaml",
-    "Analytic Rules/IoTUnauthorizedDevice.yaml",
-    "Analytic Rules/IoTUnauthorizedNetworkConfiguration.yaml",
-    "Analytic Rules/IoTUnauthorizedPLCModifications.yaml",
-    "Analytic Rules/IoTUnauthorizedRemoteAccess.yaml"
+	"Analytic Rules/IoTExcessiveLoginAttempts.yaml",
+	"Analytic Rules/IoTFirmwareUpdates.yaml",
+	"Analytic Rules/IoTHighBandwidth.yaml",
+	"Analytic Rules/IoTINoSensorTrafficDetected.yaml",
+	"Analytic Rules/IoTIllegalFunctionCodes.yaml",
+	"Analytic Rules/IoTInsecurePLC.yaml",
+	"Analytic Rules/IoTInternetAccess.yaml",
+	"Analytic Rules/IoTMalware.yaml",
+	"Analytic Rules/IoTNetworkScanning.yaml",
+	"Analytic Rules/IoTPLCStopCommand.yaml",
+	"Analytic Rules/IoTUnauthorizedDevice.yaml",
+	"Analytic Rules/IoTUnauthorizedNetworkConfiguration.yaml",
+	"Analytic Rules/IoTUnauthorizedPLCModifications.yaml",
+	"Analytic Rules/IoTUnauthorizedRemoteAccess.yaml"
   ],
   "Playbooks": [
-    "Playbooks/AutoCloseIncidents.json",
-    "Playbooks/MailBySensor.json",
-    "Playbooks/NewAssetServiceNowTicket.json"
+    "Playbooks/AutoCloseIncidents/AutoCloseIncidents.json",
+    "Playbooks/MailBySensor/MailBySensor.json",
+    "Playbooks/NewAssetServiceNowTicket/NewAssetServiceNowTicket.json",
+    "Playbooks/AutoAlertStatusSync/AutoAlertStatusSync.json",
+    "Playbooks/SendEmailToIoTOwner/SendEmailToIoTOwner.json",
+    "Playbooks/AutoTriageIncident/AutoTriageIncident.json",  
+    "Playbooks/AutoTriageIncident/CVEAutoWorkflow.json",  
+    "Playbooks/GetD4IoTDeviceCVEs/GetD4IoTDeviceCVEs.json"
   ],
   "Metadata": "SolutionMetadata.json",
-  "BasePath": "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/IoTOTThreatMonitoringwithDefenderforIoT",
-  "Version": "1.0.3"
+  "BasePath": "C:\\GitHub\\Azure-Sentinel\\Solutions\\IoTOTThreatMonitoringwithDefenderforIoT",
+  "Version": "2.0.0",
+  "TemplateSpec": true,
+  "Is1Pconnector": true
 }

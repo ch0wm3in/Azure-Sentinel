@@ -14,7 +14,7 @@ function Test-AwsConfiguration
      {
         Write-Log -Message $error[0] -LogFileName $LogFileName -Severity Error
         Write-Log -Message "Please execute again 'aws configure' and verify that AWS configuration is correct." -LogFileName $LogFileName -Severity Error
-        Write-Log -Message "For more information see AWS doc https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html" -LogFileName $LogFileName -Severity Error               
+        Write-Log -Message "For more details please see AWS doc https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html" -LogFileName $LogFileName -Severity Error               
         exit
      }
 }
@@ -28,12 +28,15 @@ function Write-RequiredConnectorDefinitionInfo
         Specifies the connector destination table
     #>
     param(
-        [Parameter(Mandatory=$true,Position=0)][string]$DestinationTable
+        [Parameter(Mandatory=$false,Position=0)][string]$DestinationTable
     )
     Write-Log -Message "Use the values below to configure the Amazon Web Service S3 data connector in the Azure Sentinel portal." -LogFileName $LogFileName -Severity Information -LinePadding 3
     Write-Log -Message "Role Arn: $roleArn" -LogFileName $LogFileName -Severity Information -LinePadding 1
     Write-Log -Message "Sqs Url: $sqsUrl" -LogFileName $LogFileName -Severity Information
-    Write-Log -Message "Destination Table: $DestinationTable" -LogFileName $LogFileName -Severity Information
+    if ($DestinationTable -ne "")
+    {
+        Write-Log -Message "Destination Table: $DestinationTable" -LogFileName $LogFileName -Severity Information
+    }
 }
 
 function Write-ScriptNotes
